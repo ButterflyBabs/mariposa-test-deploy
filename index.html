@@ -182,14 +182,61 @@
     .fc .cta-btn { margin-top:30px; }
     .fc .gt { margin-top:20px; font-size:14px; opacity:0.5; font-style:italic; }
 
-    @media (max-width:600px) {
-      .hero h1 { font-size:28px; }
-      .hero .subhead { font-size:16px; }
-      .dim-g { grid-template-columns:1fr; }
-      .id-g { grid-template-columns:1fr; }
-      .two-col { grid-template-columns:1fr; }
-      .section h2 { font-size:24px; }
-      body { font-size:16px; }
+/* ====== TABLET (768-1024px) ====== */
+@media (max-width:1024px) {
+  .container { max-width: 92%; }
+  .hero h1 { font-size:34px; }
+  .hero .subhead { font-size:18px; }
+  .section h2 { font-size:28px; }
+  .pills { flex-direction:column; align-items:center; }
+  .pill-arr { transform:rotate(90deg); padding:2px 0; }
+  .tl-v { gap:16px; }
+}
+
+/* ====== MOBILE (below 768px) ====== */
+@media (max-width:768px) {
+  body { font-size:16px; }
+  .hero { padding:60px 20px 50px; }
+  .hero h1 { font-size:28px; }
+  .hero .subhead { font-size:16px; }
+  .hero .pb .price { font-size:32px; }
+  .hero .prehead { font-size:11px; letter-spacing:2px; }
+  .section { padding:48px 0; }
+  .section h2 { font-size:24px; margin-bottom:20px; }
+  .section p.lead { font-size:18px; }
+  .dim-g { grid-template-columns:1fr; }
+  .id-g { grid-template-columns:1fr; }
+  .two-col { grid-template-columns:1fr; }
+  .pills { flex-direction:column; align-items:center; }
+  .pill-arr { transform:rotate(90deg); padding:2px 0; }
+  .tl-v { flex-wrap:wrap; gap:12px; }
+  .tl-c { width:50px; height:50px; font-size:22px; }
+  .cta-btn { font-size:17px; padding:16px 36px; }
+  .ub { font-size:12px; padding:12px 16px; letter-spacing:1px; }
+  .testi { padding:18px 20px; }
+  .obj { padding-left:14px; }
+  .obj h4 { font-size:16px; }
+  .obj p { font-size:15px; }
+  .or { gap:8px; }
+  .or .db { width:24px; height:24px; }
+  .col-box { padding:16px; }
+  .col-box li { font-size:14px; }
+  .fc { padding:50px 20px; }
+  .fc h2 { font-size:24px; }
+  .identity-card { padding:16px; }
+  .hero-bg-logo { max-width:70%; }
+}
+
+/* ====== SMALL MOBILE (below 420px) ====== */
+@media (max-width:420px) {
+  .hero h1 { font-size:24px; }
+  .hero .subhead { font-size:15px; }
+  .section h2 { font-size:22px; }
+  .hero .pb { padding:20px 16px; }
+  .hero .pb .price { font-size:28px; }
+  .cta-btn { font-size:16px; padding:14px 28px; }
+  .dim-i { font-size:13px; padding:10px 12px; }
+}
     }
   </style>
 </head>
