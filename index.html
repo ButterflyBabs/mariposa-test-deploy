@@ -66,13 +66,13 @@
     .hero h1 { font-size:40px; line-height:1.25; margin-bottom:20px; font-weight:600; }
     .hero h1 .g { color:#C4B792; }
     .hero .subhead { font-size:19px; line-height:1.6; opacity:0.6; margin-bottom:30px; font-weight:400; font-family:'Noto Sans',sans-serif; }
-    .hero .pb {
-      background:rgba(45,49,47,0.04); border:1px solid rgba(45,49,47,0.1);
-      border-radius:12px; padding:28px 24px; display:inline-block; margin-top:10px;
-    }
-    .hero .pb .price { font-size:40px; font-weight:600; color:#C4B792; font-family:'Noto Serif',serif; }
-    .hero .pb .ps { font-size:15px; opacity:0.7; margin-top:6px; }
-    .hero .pb .po { font-size:17px; margin-top:12px; opacity:0.85; }
+    .pb-wrap { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:10px; }
+    .pb-option { background:rgba(45,49,47,0.04); border:1px solid rgba(45,49,47,0.1); border-radius:12px; padding:24px 28px; min-width:180px; flex:1; max-width:260px; text-align:center; }
+    .pb-option .price { font-size:36px; font-weight:600; color:#C4B792; font-family:'Noto Serif',serif; }
+    .pb-option .ps { font-size:14px; opacity:0.7; margin-top:4px; line-height:1.4; }
+    .pb-option .hl { font-size:13px; opacity:0.5; margin-top:8px; font-style:italic; }
+    .pb-option.rec { background:rgba(196,183,146,0.12); border-color:#C4B792; }
+    .pb-option.rec .badge { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#CBA488; font-weight:600; margin-bottom:6px; }
 
     .cta-btn {
       display:inline-block; background:#2F312F; color:#F5F1E8;
@@ -199,6 +199,8 @@
   .hero { padding:60px 20px 50px; }
   .hero h1 { font-size:28px; }
   .hero .subhead { font-size:16px; }
+  .pb-wrap { flex-direction:column; align-items:center; }
+  .pb-option { max-width:280px; min-width:0; width:100%; }
   .hero .pb .price { font-size:32px; }
   .hero .prehead { font-size:11px; letter-spacing:2px; }
   .section { padding:48px 0; }
@@ -233,6 +235,8 @@
   .hero .subhead { font-size:15px; }
   .section h2 { font-size:22px; }
   .hero .pb { padding:20px 16px; }
+  .pb-option { padding:20px 16px; }
+  .pb-option .price { font-size:30px; }
   .hero .pb .price { font-size:28px; }
   .cta-btn { font-size:16px; padding:14px 28px; }
   .dim-i { font-size:13px; padding:10px 12px; }
@@ -250,13 +254,18 @@
     <div class="prehead">Your Next Faithful Step</div>
     <h1>You Have The Awareness.<br>Now You Need The <span class="g">Container</span>.</h1>
     <p class="subhead">You walked through the Incubator. You felt something shift.<br>You know more information isn't the answer — <em>lived practice is</em>.<br>This is the door to the deeper work.</p>
-    <div class="pb">
-      <div class="price">$2,497</div>
-      <div class="ps">one-time investment in your aligned life</div>
-      <div class="po">— or —<br><strong>$497 down</strong> + 2 payments of <strong>$997</strong></div>
+    <div class="pb-wrap">
+      <div class="pb-option rec">
+        <div class="badge">Best Value</div>
+        <div class="price">$2,497</div>
+        <div class="ps">Pay in Full<br>One-time investment</div>
+      </div>
+      <div class="pb-option">
+        <div class="price">$497</div>
+        <div class="ps">Down Payment</div>
+        <div class="hl">+ 2 payments of $997</div>
+      </div>
     </div><br>
-    <a href="#" class="cta-btn">Join LifeCharter Circle Now</a>
-  </div>
 </section>
 
 <!-- ====== OPENING ====== -->
@@ -491,9 +500,18 @@
   <div class="container">
     <h2>You Have Felt What Is Possible.</h2>
     <p style="font-size:20px;">Now give yourself the container to live it.</p>
-    <div style="margin:30px 0;">
-      <div style="font-size:38px;font-weight:600;color:#C4B792;font-family:'Noto Serif',serif;">$2,497</div>
-      <p style="margin-top:8px;">or <strong>$497 down</strong> + 2 payments of <strong>$997</strong></p>
+    <div class="pb-wrap" style="margin:30px auto;">
+      <div class="pb-option rec">
+        <div class="badge">Best Value</div>
+        <div class="price">$2,497</div>
+        <div class="ps">Pay in Full &mdash; One-time investment</div>
+      </div>
+      <div class="pb-option">
+        <div class="price">$497</div>
+        <div class="ps">Down Payment</div>
+        <div class="hl">+ 2 payments of $997</div>
+      </div>
+    </div>
     </div>
     <a href="#" class="cta-btn">Join LifeCharter Circle Now</a>
     <div class="gt">7-Day Guarantee — If the Circle is not the right fit, you receive a full refund.</div>
