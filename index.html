@@ -10,214 +10,221 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Noto Sans', 'Helvetica', 'Arial', sans-serif;
+      font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
       color: #2F312F;
       background: #F5F1E8;
       line-height: 1.8;
       font-size: 18px;
     }
-    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
-    /* Typography */
     h1, h2, h3, h4, .serif {
-      font-family: 'Noto Serif', 'Georgia', serif;
+      font-family: 'Noto Serif', Georgia, serif;
     }
 
-    /* HERO */
-    .hero {
-      background: #2F312F;
-      color: #F5F1E8;
-      padding: 80px 24px 60px;
-      text-align: center;
-      position: relative;
-    }
-    .hero::before {
-      content: "";
+    /* Background watercolor washes */
+    .wash-wrap { position: relative; overflow: hidden; }
+    .wash-blob {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(196, 183, 146, 0.08) 0%, transparent 70%);
-      pointer-events: none;
+      pointer-events: none; z-index: 0;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.06;
     }
-    .hero .container { max-width: 720px; position: relative; z-index: 1; }
+    .wash-blob.t { top:-80px; right:-100px; width:400px; height:400px; background:#C4B792; }
+    .wash-blob.b { bottom:-60px; left:-80px; width:350px; height:350px; background:#DAD2B9; }
+    .wash-blob.m { top:40%; right:-80px; width:300px; height:300px; background:#C4B792; opacity:0.04; }
+    .wash-blob.l { bottom:-60px; right:-60px; width:300px; height:300px; background:#CBA488; opacity:0.04; }
+
+    /* Rosette SVG */
+    .rosette-svg { display:block; margin:0 auto; width:52px; height:52px; }
+    .rosette-svg.sm { width:40px; height:40px; }
+    .rosette-svg.lg { width:64px; height:64px; }
+
+    /* Pathway dashes */
+    .path-dash {
+      display:block; margin:16px auto; width:80px; height:20px;
+    }
+
+    /* Hero */
+    .hero {
+      background:#2F312F; color:#F5F1E8; padding:80px 24px 60px; text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .hero-blob {
+      position:absolute; pointer-events:none; z-index:0;
+      border-radius:50%; filter:blur(70px); opacity:0.06;
+    }
+    .hero-blob.t { top:-100px; right:-80px; width:500px; height:500px; background:#C4B792; }
+    .hero-blob.b { bottom:-80px; left:-80px; width:400px; height:400px; background:#CBA488; }
+    .hero .container { max-width:720px; position:relative; z-index:1; }
     .hero .prehead {
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #C4B792;
-      margin-bottom: 20px;
-      font-weight: 500;
+      font-size:13px; letter-spacing:3px; text-transform:uppercase;
+      color:#C4B792; margin-bottom:20px; font-weight:500;
     }
-    .hero h1 {
-      font-size: 40px;
-      line-height: 1.25;
-      margin-bottom: 20px;
-      font-weight: 600;
+    .hero h1 { font-size:40px; line-height:1.25; margin-bottom:20px; font-weight:600; }
+    .hero h1 .g { color:#C4B792; }
+    .hero .subhead { font-size:19px; line-height:1.6; opacity:0.8; margin-bottom:30px; font-weight:400; font-family:'Noto Sans',sans-serif; }
+    .hero .pb {
+      background:rgba(245,241,232,0.07); border:1px solid rgba(245,241,232,0.15);
+      border-radius:12px; padding:28px 24px; display:inline-block; margin-top:10px;
     }
-    .hero h1 .gold { color: #C4B792; }
-    .hero .subhead {
-      font-size: 19px;
-      line-height: 1.6;
-      opacity: 0.8;
-      margin-bottom: 30px;
-      font-weight: 400;
-      font-family: 'Noto Sans', sans-serif;
-    }
-    .hero .price-block {
-      background: rgba(245, 241, 232, 0.07);
-      border: 1px solid rgba(245, 241, 232, 0.15);
-      border-radius: 12px;
-      padding: 28px 24px;
-      display: inline-block;
-      margin-top: 10px;
-    }
-    .hero .price-block .price { font-size: 40px; font-weight: 600; color: #C4B792; font-family: 'Noto Serif', serif; }
-    .hero .price-block .price-sub { font-size: 15px; opacity: 0.7; margin-top: 6px; }
-    .hero .price-block .payment-option { font-size: 17px; margin-top: 12px; opacity: 0.85; }
+    .hero .pb .price { font-size:40px; font-weight:600; color:#C4B792; font-family:'Noto Serif',serif; }
+    .hero .pb .ps { font-size:15px; opacity:0.7; margin-top:6px; }
+    .hero .pb .po { font-size:17px; margin-top:12px; opacity:0.85; }
 
-    .cta-button {
-      display: inline-block;
-      background: #C4B792;
-      color: #2F312F;
-      font-size: 19px;
-      font-weight: 600;
-      padding: 18px 48px;
-      border-radius: 50px;
-      text-decoration: none;
-      margin-top: 30px;
-      transition: all 0.2s;
-      letter-spacing: 0.3px;
+    .cta-btn {
+      display:inline-block; background:#C4B792; color:#2F312F;
+      font-size:19px; font-weight:600; padding:18px 48px; border-radius:50px;
+      text-decoration:none; margin-top:30px; transition:all 0.2s; letter-spacing:0.3px;
     }
-    .cta-button:hover { background: #B8A97F; transform: translateY(-2px); }
+    .cta-btn:hover { background:#B8A97F; transform:translateY(-2px); }
 
-    /* Section styling */
-    .section { padding: 64px 0; }
-    .section h2 {
-      font-family: 'Noto Serif', serif;
-      font-size: 32px;
-      margin-bottom: 28px;
-      color: #2F312F;
-      line-height: 1.3;
-      font-weight: 600;
+    .section { padding:64px 0; }
+    .section h2 { font-family:'Noto Serif',serif; font-size:32px; margin-bottom:28px; color:#2F312F; line-height:1.3; font-weight:600; }
+    .section h2 .s { color:#C4B792; }
+    .section p { margin-bottom:18px; color:#2F312F; }
+    .section p.lead { font-size:20px; font-weight:500; }
+
+    .bg-fog { background:#DAD2B9; }
+    .bg-warm { background:rgba(196,183,146,0.12); }
+
+    .sep {
+      height:1px; margin:0; border:none;
+      background:linear-gradient(to right, transparent, rgba(196,183,146,0.4), transparent);
     }
-    .section h2 .s { color: #C4B792; }
-    .section p { margin-bottom: 18px; color: #2F312F; }
-    .section p.lead { font-size: 20px; font-weight: 500; }
-
-    .grey-bg { background: #DAD2B9; }
-    .warm-bg { background: rgba(196, 183, 146, 0.12); }
-
-    hr { border: none; border-top: 1px solid rgba(45, 49, 47, 0.1); margin: 0; }
 
     /* Testimonials */
-    .testimonial {
-      background: rgba(245, 241, 232, 0.7);
-      border-left: 3px solid #C4B792;
-      padding: 24px 28px;
-      margin-bottom: 20px;
-      border-radius: 0 8px 8px 0;
-      font-style: italic;
-      font-family: 'Noto Serif', serif;
+    .testi {
+      background:rgba(245,241,232,0.7); border-left:3px solid #C4B792;
+      padding:24px 28px; margin-bottom:20px; border-radius:0 8px 8px 0;
+      font-style:italic; font-family:'Noto Serif',serif; position:relative;
     }
-    .testimonial .author {
-      font-style: normal;
-      font-weight: 600;
-      margin-top: 10px;
-      color: #2F312F;
-      font-family: 'Noto Sans', sans-serif;
-      font-size: 15px;
-    }
+    .testi .qm { position:absolute; top:6px; left:14px; font-size:48px; color:#C4B792; opacity:0.15; font-family:'Noto Serif',serif; line-height:1; }
+    .testi .au { font-style:normal; font-weight:600; margin-top:10px; color:#2F312F; font-family:'Noto Sans',sans-serif; font-size:15px; }
 
     /* Objections */
-    .objection { margin-bottom: 28px; padding-left: 20px; border-left: 2px solid #DAD2B9; }
-    .objection h4 { font-size: 17px; color: #2F312F; margin-bottom: 6px; font-weight: 600; }
-    .objection p { font-size: 16px; color: #2F312F; margin-bottom: 0; opacity: 0.85; }
+    .obj { margin-bottom:28px; padding-left:20px; border-left:2px solid #DAD2B9; }
+    .obj h4 { font-size:17px; color:#2F312F; margin-bottom:6px; font-weight:600; }
+    .obj p { font-size:16px; color:#2F312F; margin-bottom:0; opacity:0.85; }
 
-    /* Dimensions grid */
-    .dimensions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 28px 0;
+    /* Dimensions */
+    .dim-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:28px 0; }
+    .dim-i {
+      background:rgba(245,241,232,0.6); border:1px solid rgba(45,49,47,0.08);
+      border-radius:6px; padding:12px 16px; font-size:14px; font-weight:500; color:#2F312F;
     }
-    .dimension-item {
-      background: rgba(245, 241, 232, 0.6);
-      border: 1px solid rgba(45, 49, 47, 0.08);
-      border-radius: 6px;
-      padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #2F312F;
-    }
-    .dimension-item::before { content: "✦ "; color: #C4B792; }
+    .dim-i::before { content:"✦ "; color:#C4B792; }
 
-    /* Urgency bar */
-    .urgency-bar {
-      background: #CBA488;
-      color: #2F312F;
-      text-align: center;
-      padding: 14px 24px;
-      font-size: 14px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: 600;
+    /* Urgency */
+    .ub {
+      background:#CBA488; color:#2F312F; text-align:center; padding:14px 24px;
+      font-size:14px; letter-spacing:1.5px; text-transform:uppercase; font-weight:600;
     }
+
+    /* Identity cards */
+    .id-g { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+    .id-c {
+      background:rgba(245,241,232,0.5); border:1px solid rgba(45,49,47,0.06);
+      border-radius:8px; padding:20px; text-align:center;
+    }
+    .id-c svg { width:32px; height:32px; margin-bottom:8px; color:#C4B792; }
+    .id-c .l { font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#C4B792; margin-bottom:4px; }
+    .id-c .d { font-size:15px; color:#2F312F; }
+
+    /* Traffic light */
+    .tl-v { display:flex; justify-content:center; gap:24px; margin:24px 0; flex-wrap:wrap; }
+    .tl-c { width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:600; margin:0 auto 8px; }
+    .tl-r { background:rgba(203,164,136,0.2); border:2px solid rgba(203,164,136,0.4); color:#CBA488; }
+    .tl-y { background:rgba(196,183,146,0.2); border:2px solid rgba(196,183,146,0.4); color:#C4B792; }
+    .tl-g { background:rgba(173,184,160,0.2); border:2px solid rgba(173,184,160,0.4); color:#ADB8A0; }
+
+    /* Process pills */
+    .pills { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 0; margin:20px 0; }
+    .pill {
+      background:#F5F1E8; border-radius:50px; padding:10px 20px; text-align:center;
+      border:1px solid rgba(45,49,47,0.06); flex:1; min-width:110px;
+    }
+    .pill .t { font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:#C4B792; }
+    .pill .q { font-size:13px; }
+    .pill-arr { display:flex; align-items:center; padding:0 4px; color:#C4B792; font-size:20px; }
+
+    /* Outcome rows */
+    .or { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
+    .or .db {
+      flex-shrink:0; width:28px; height:28px; border-radius:50%;
+      border:2px solid #C4B792; display:flex; align-items:center; justify-content:center; margin-top:3px;
+    }
+    .or .db svg { width:14px; height:14px; stroke:#C4B792; fill:none; stroke-width:2; }
+
+    /* Identity shift columns */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:20px 0; }
+    .col-box { background:rgba(245,241,232,0.5); border:1px solid rgba(45,49,47,0.06); border-radius:8px; padding:20px; }
+    .col-box .ch { font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:#C4B792; margin-bottom:12px; }
+    .col-box li { list-style:none; padding:6px 0; font-size:15px; border-bottom:1px solid rgba(45,49,47,0.04); }
+    .col-box li:last-child { border-bottom:none; }
+    .col-box li::before { content:"↳ "; color:#C4B792; }
 
     /* Final CTA */
-    .final-cta {
-      background: #2F312F;
-      color: #F5F1E8;
-      text-align: center;
-      padding: 70px 24px;
+    .fc {
+      background:#2F312F; color:#F5F1E8; text-align:center; padding:70px 24px;
+      position:relative; overflow:hidden;
     }
-    .final-cta h2 { color: #F5F1E8; }
-    .final-cta p { color: rgba(245, 241, 232, 0.8); font-size: 18px; }
-    .final-cta .cta-button { margin-top: 30px; }
-    .final-cta .guarantee {
-      margin-top: 20px;
-      font-size: 14px;
-      opacity: 0.6;
-      font-style: italic;
+    .fc::before {
+      content:""; position:absolute; top:0; left:0; right:0; bottom:0;
+      background:radial-gradient(ellipse at 50% 50%, rgba(196,183,146,0.05) 0%, transparent 70%);
+      pointer-events:none;
     }
+    .fc .container { position:relative; z-index:1; }
+    .fc h2 { color:#F5F1E8; }
+    .fc p { color:rgba(245,241,232,0.8); font-size:18px; }
+    .fc .cta-btn { margin-top:30px; }
+    .fc .gt { margin-top:20px; font-size:14px; opacity:0.6; font-style:italic; }
 
-    /* Spacer elements */
-    .thin-line { height: 1px; background: linear-gradient(to right, transparent, #C4B792, transparent); margin: 0; border: none; }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 28px; }
-      .hero .subhead { font-size: 16px; }
-      .dimensions { grid-template-columns: 1fr; }
-      .section h2 { font-size: 24px; }
-      body { font-size: 16px; }
+    @media (max-width:600px) {
+      .hero h1 { font-size:28px; }
+      .hero .subhead { font-size:16px; }
+      .dim-g { grid-template-columns:1fr; }
+      .id-g { grid-template-columns:1fr; }
+      .two-col { grid-template-columns:1fr; }
+      .section h2 { font-size:24px; }
+      body { font-size:16px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ====== TOP URGENCY BAR ====== -->
-<div class="urgency-bar">⏳ Early Adopter Pricing — Your Incubator Cohort Rate Expires Soon</div>
+<div class="ub">⏳ Early Adopter Pricing — Your Incubator Cohort Rate Expires Soon</div>
 
 <!-- ====== HERO ====== -->
 <section class="hero">
+  <div class="hero-blob t"></div>
+  <div class="hero-blob b"></div>
   <div class="container">
+    <svg class="rosette-svg lg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 3"/>
+      <circle cx="32" cy="32" r="6" fill="currentColor" opacity="0.5"/>
+      <line x1="4" y1="32" x2="12" y2="32" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+      <line x1="52" y1="32" x2="60" y2="32" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+      <line x1="32" y1="4" x2="32" y2="12" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+      <line x1="32" y1="52" x2="32" y2="60" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+    </svg>
     <div class="prehead">Your Next Faithful Step</div>
-    <h1>You Have The Awareness.<br>Now You Need The <span class="gold">Container</span>.</h1>
-    <p class="subhead">
-      You walked through the Incubator. You felt something shift.<br>
-      You know more information isn't the answer — <em>lived practice is</em>.<br>
-      This is the door to the deeper work.
-    </p>
-    <div class="price-block">
+    <h1>You Have The Awareness.<br>Now You Need The <span class="g">Container</span>.</h1>
+    <p class="subhead">You walked through the Incubator. You felt something shift.<br>You know more information isn't the answer — <em>lived practice is</em>.<br>This is the door to the deeper work.</p>
+    <div class="pb">
       <div class="price">$2,497</div>
-      <div class="price-sub">one-time investment in your aligned life</div>
-      <div class="payment-option">— or —<br><strong>$497 down</strong> + 2 payments of <strong>$997</strong></div>
-    </div>
-    <br>
-    <a href="#" class="cta-button">Join LifeCharter Circle Now</a>
+      <div class="ps">one-time investment in your aligned life</div>
+      <div class="po">— or —<br><strong>$497 down</strong> + 2 payments of <strong>$997</strong></div>
+    </div><br>
+    <a href="#" class="cta-btn">Join LifeCharter Circle Now</a>
   </div>
 </section>
 
-<!-- ====== THE PROBLEM / THE OPENING ====== -->
-<section class="section">
+<!-- ====== OPENING ====== -->
+<section class="section wash-wrap">
+  <div class="wash-blob t"></div>
   <div class="container">
     <p class="lead">You've done the inner work.</p>
     <p>You've read the books. Listened to the podcasts. Journaled. Prayed. Reflected. Maybe you've even worked with coaches, attended retreats, or spent hours in honest, tear-filled conversation with yourself.</p>
@@ -229,239 +236,256 @@
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
-<!-- ====== THE INCUBATOR GAP ====== -->
-<section class="section warm-bg">
+<!-- ====== INCUBATOR GAP ====== -->
+<section class="section bg-warm wash-wrap">
+  <div class="wash-blob m"></div>
   <div class="container">
-    <h2>The Incubator Opened The Door.<br>Now <span class="s">Step Through</span>.</h2>
-    <p>In the Incubator, you were introduced to three core secrets:</p>
-    <p style="padding-left: 20px;"><strong>Identity First</strong> — Why more information is not the answer if the inner premise has not shifted.</p>
-    <p style="padding-left: 20px;"><strong>The Yellow Light</strong> — How to pause before reacting, locate what is really happening, and choose from alignment instead of fear.</p>
-    <p style="padding-left: 20px;"><strong>Aligned Action</strong> — How to move forward rooted in who you are becoming, not who you have been.</p>
+    <svg class="path-dash" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 10 L70 10" stroke="#C4B792" stroke-width="1" stroke-dasharray="4 3"/>
+      <circle cx="10" cy="10" r="3" fill="#C4B792"/>
+      <circle cx="70" cy="10" r="3" fill="#C4B792"/>
+    </svg>
+    <h2 style="margin-top:8px;">The Incubator Opened The Door.<br>Now <span class="s">Step Through</span>.</h2>
+
+    <div class="id-g">
+      <div class="id-c">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="11" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7 30c0-5 4-9 9-9s9 4 9 9" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <div class="l">Identity First</div>
+        <div class="d">Why more information is not the answer if the premise hasn't shifted</div>
+      </div>
+      <div class="id-c">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.4"/>
+          <path d="M16 4v3M16 25v3M4 16h3M25 16h3" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <div class="l">The Yellow Light</div>
+        <div class="d">Pause, locate truth, choose from alignment instead of fear</div>
+      </div>
+      <div class="id-c" style="grid-column:1/-1;">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 18l8-8 8 8 8-8" stroke="currentColor" stroke-width="2"/>
+          <path d="M4 24l8-8 8 8 8-8" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div class="l">Aligned Action</div>
+        <div class="d">Move forward rooted in who you are becoming, not who you have been</div>
+      </div>
+    </div>
+
     <p>You felt the truth of it. You recognized something real.</p>
     <p>But <em>recognition is not integration</em>. Insight is not transformation.</p>
     <p>Between knowing and living lies the gap that only intentional practice, structure, and support can bridge.</p>
-    <p style="font-size: 22px; font-family: 'Noto Serif', serif; font-weight: 600; margin-top: 24px;">LifeCharter Circle is that bridge.</p>
+    <p style="font-size:22px; font-family:'Noto Serif',serif; font-weight:600; margin-top:24px; text-align:center;">LifeCharter Circle is that bridge.</p>
+    <svg class="path-dash" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 10 L70 10" stroke="#C4B792" stroke-width="1" stroke-dasharray="4 3"/>
+      <circle cx="10" cy="10" r="3" fill="#C4B792"/>
+      <circle cx="70" cy="10" r="3" fill="#C4B792"/>
+    </svg>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== WHAT YOU GET ====== -->
-<section class="section">
+<section class="section wash-wrap">
+  <div class="wash-blob b"></div>
   <div class="container">
     <h2>Inside The Circle: <span class="s">What You Receive</span></h2>
-
-    <p><strong>Guided LifeCharter Modules</strong><br>
-    A walk-through of the living architecture of your life. You examine where you are, what you truly desire, what beliefs have been shaping your choices, and what aligned vision wants to emerge.</p>
-
-    <p><strong>The 12 Life Dimensions</strong><br>
-    LifeCharter looks at the whole person — not just one problem area:</p>
-
-    <div class="dimensions">
-      <div class="dimension-item">Spiritual Life</div>
-      <div class="dimension-item">Emotional Life</div>
-      <div class="dimension-item">Health & Vitality</div>
-      <div class="dimension-item">Relationships</div>
-      <div class="dimension-item">Career & Calling</div>
-      <div class="dimension-item">Finances</div>
-      <div class="dimension-item">Character & Integrity</div>
-      <div class="dimension-item">Intellectual Life</div>
-      <div class="dimension-item">Social Life</div>
-      <div class="dimension-item">Parenting & Family</div>
-      <div class="dimension-item">Quality of Life</div>
-      <div class="dimension-item">Overall Life Vision</div>
+    <p><strong>Guided LifeCharter Modules</strong><br>A walk-through of the living architecture of your life. You examine where you are, what you truly desire, what beliefs have been shaping your choices, and what aligned vision wants to emerge.</p>
+    <p><strong>The 12 Life Dimensions</strong><br>LifeCharter looks at the whole person — not just one problem area:</p>
+    <div class="dim-g">
+      <div class="dim-i">Spiritual Life</div>
+      <div class="dim-i">Emotional Life</div>
+      <div class="dim-i">Health & Vitality</div>
+      <div class="dim-i">Relationships</div>
+      <div class="dim-i">Career & Calling</div>
+      <div class="dim-i">Finances</div>
+      <div class="dim-i">Character & Integrity</div>
+      <div class="dim-i">Intellectual Life</div>
+      <div class="dim-i">Social Life</div>
+      <div class="dim-i">Parenting & Family</div>
+      <div class="dim-i">Quality of Life</div>
+      <div class="dim-i">Overall Life Vision</div>
     </div>
-
-    <p><strong>Coaching & Reflection</strong><br>
-    You bring your real life into the Circle — the decisions you're facing, the resistance you're feeling, the patterns you keep noticing. You are not consuming content. You are being supported as you <em>apply</em> it.</p>
-
-    <p><strong>Community Support</strong><br>
-    Fellow travelers who are also choosing clarity, truth, and aligned becoming. A place of witnessing, encouragement, and shared momentum.</p>
-
-    <p><strong>Practical Integration Tools</strong><br>
-    The Traffic Light Decision Model. The Yellow Yield practice. The Aligned Becoming Process. Daily practices that help you move through life with presence, courage, and consistency.</p>
-
-    <p><strong>Your Living LifeCharter Blueprint</strong><br>
-    By the end, you have a <em>personal compass</em> — a working document that helps you return to your true north again and again.</p>
+    <p><strong>Coaching & Reflection</strong><br>You bring your real life into the Circle — the decisions you're facing, the resistance you're feeling, the patterns you keep noticing. You are not consuming content. You are being supported as you <em>apply</em> it.</p>
+    <p><strong>Community Support</strong><br>Fellow travelers who are also choosing clarity, truth, and aligned becoming. A place of witnessing, encouragement, and shared momentum.</p>
+    <p><strong>Practical Integration Tools</strong><br>The Traffic Light Decision Model. The Yellow Yield practice. The Aligned Becoming Process. Daily practices that help you move through life with presence, courage, and consistency.</p>
+    <p><strong>Your Living LifeCharter Blueprint</strong><br>By the end, you have a <em>personal compass</em> — a working document that helps you return to your true north again and again.</p>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
-<!-- ====== THE CORE MECHANISM ====== -->
-<section class="section grey-bg">
+<!-- ====== HOW IT WORKS ====== -->
+<section class="section bg-fog wash-wrap">
+  <div class="wash-blob t"></div>
   <div class="container">
     <h2>How LifeCharter <span class="s">Actually Works</span></h2>
     <p>Most frameworks focus on behavior. Do this. Stop that. Optimize here.</p>
     <p>LifeCharter works <em>underneath</em> the behavior.</p>
-    <p style="font-size: 20px; font-style: italic; font-family: 'Noto Serif', serif; padding: 16px 0;">"What premise am I living from?"</p>
-    <p><strong>Premise</strong> → Identify the belief quietly directing your life.<br>
-    <strong>Vision</strong> → Clarify what you truly want, not what you were taught to want.<br>
-    <strong>Purpose</strong> → Reconnect to meaning, contribution, and divine alignment.<br>
-    <strong>Strategy</strong> → Create next steps that match your identity, values, and season.</p>
-    <p style="margin-top: 20px;"><strong>The Traffic Light Model:</strong></p>
-    <p>🔴 <strong>Red Light</strong> — Where am I stopped, stuck, or reacting from fear?<br>
-    🟡 <strong>Yellow Light</strong> — Can I pause, locate truth, and choose consciously?<br>
-    🟢 <strong>Green Light</strong> — What is the aligned action that honors who I am becoming?</p>
-    <p style="margin-top: 16px; font-family: 'Noto Serif', serif; font-size: 19px;">Identity, vision, purpose, and strategy — brought into one living system.</p>
+    <p style="font-size:20px; font-style:italic; font-family:'Noto Serif',serif; padding:16px 0; text-align:center;">"What premise am I living from?"</p>
+
+    <div class="pills">
+      <div class="pill"><div class="t">Premise</div><div class="q">What belief is directing my life?</div></div>
+      <div class="pill-arr">→</div>
+      <div class="pill"><div class="t">Vision</div><div class="q">What do I truly want?</div></div>
+      <div class="pill-arr">→</div>
+      <div class="pill"><div class="t">Purpose</div><div class="q">What is mine to contribute?</div></div>
+      <div class="pill-arr">→</div>
+      <div class="pill"><div class="t">Strategy</div><div class="q">What step matches my truth?</div></div>
+    </div>
+
+    <div class="tl-v">
+      <div style="text-align:center;"><div class="tl-c tl-r">R</div><div style="font-size:12px;font-weight:600;color:#CBA488;">RED</div><div style="font-size:12px;opacity:0.7;max-width:120px;">Stopped, stuck, reacting</div></div>
+      <div style="text-align:center;"><div class="tl-c tl-y">Y</div><div style="font-size:12px;font-weight:600;color:#C4B792;">YELLOW</div><div style="font-size:12px;opacity:0.7;max-width:120px;">Pause, locate, choose</div></div>
+      <div style="text-align:center;"><div class="tl-c tl-g">G</div><div style="font-size:12px;font-weight:600;color:#ADB8A0;">GREEN</div><div style="font-size:12px;opacity:0.7;max-width:120px;">Aligned action forward</div></div>
+    </div>
+
+    <svg class="rosette-svg sm" style="margin-top:20px;" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1"/>
+      <circle cx="24" cy="24" r="14" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <circle cx="24" cy="24" r="5" fill="currentColor" opacity="0.4"/>
+    </svg>
+    <p style="text-align:center;font-family:'Noto Serif',serif;font-size:18px;margin-top:8px;">Identity, vision, purpose, and strategy — brought into one living system.</p>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== OUTCOMES ====== -->
-<section class="section">
+<section class="section wash-wrap">
+  <div class="wash-blob b"></div>
   <div class="container">
     <h2>What Shifts <span class="s">Inside The Circle</span></h2>
     <p>Participants don't just learn more — they <em>become different people</em>.</p>
-    <p>↳ Overwhelm → <strong>Clarity</strong>. You stop trying to solve everything at once and begin seeing the true next step.</p>
-    <p>↳ Reaction → <strong>Response</strong>. You learn to pause before old patterns take the wheel.</p>
-    <p>↳ Collecting answers → <strong>Deeper alignment</strong>. You stop gathering and begin living from the truth already emerging within you.</p>
-    <p>↳ Scattered effort → <strong>Focused action</strong>. You choose actions that match your values, vision, and season.</p>
-    <p>↳ Self-doubt → <strong>Self-trust</strong>. You learn to hear the Still Small Voice beneath fear, urgency, and confusion.</p>
-    <p>↳ Survival identity → <strong>Aligned becoming</strong>. You stop defining yourself by what happened and begin creating from who you truly are.</p>
-    <p>↳ Spiritual disconnection → <strong>Embodied faith</strong>. You bring prayer, reflection, intuition, and practical movement into daily life.</p>
-    <p>↳ Stuckness → <strong>Sacred momentum</strong>. You take faithful steps — not because everything is figured out, but because you are no longer abandoning yourself in the process.</p>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor"/></svg></div><span><strong>Clarity</strong> — You stop solving everything at once and see the true next step.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" stroke="currentColor"/></svg></div><span><strong>Response</strong> — You pause before old patterns take the wheel.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" stroke="currentColor"/></svg></div><span><strong>Deeper alignment</strong> — You stop gathering and begin living from the truth emerging within you.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><path d="M1 7h12M7 1v12" stroke="currentColor"/></svg></div><span><strong>Focused action</strong> — You choose actions that match your values, vision, and season.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><path d="M7 1v4M7 9v4" stroke="currentColor"/></svg></div><span><strong>Self-trust</strong> — You hear the Still Small Voice beneath fear, urgency, and confusion.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><path d="M1 13l6-12 6 12" stroke="currentColor"/></svg></div><span><strong>Aligned becoming</strong> — You stop defining yourself by the past and create from who you truly are.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor"/><circle cx="7" cy="7" r="2" fill="currentColor"/></svg></div><span><strong>Embodied faith</strong> — You bring prayer, reflection, and practical movement into daily life.</span></div>
+    <div class="or"><div class="db"><svg viewBox="0 0 14 14"><path d="M1 7l4-4 4 4 4-4" stroke="currentColor"/></svg></div><span><strong>Sacred momentum</strong> — You take faithful steps without abandoning yourself in the process.</span></div>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== TESTIMONIALS ====== -->
-<section class="section warm-bg">
+<section class="section bg-warm wash-wrap">
+  <div class="wash-blob t"></div>
   <div class="container">
     <h2>What Travel Partners <span class="s">Are Saying</span></h2>
-
-    <div class="testimonial">
-      <p>"I have never heard anyone talk about life design as holistically as Babs. The way she covers all 12 different dimensions of your life in the LifeCharter program is extraordinary."</p>
-      <div class="author">— Rachel P.</div>
-    </div>
-
-    <div class="testimonial">
-      <p>"This program is an opportunity to transcend the ordinary and embark on a journey of self-realization, authenticity, and conscious living."</p>
-      <div class="author">— Samantha S.</div>
-    </div>
-
-    <div class="testimonial">
-      <p>"After years of feeling trapped by fear and uncertainty, this work helped me create a life plan that supported me through one of the most difficult transitions of my life."</p>
-      <div class="author">— LifeCharter Participant</div>
-    </div>
+    <div class="testi"><span class="qm">"</span><p>"I have never heard anyone talk about life design as holistically as Babs. The way she covers all 12 different dimensions of your life in the LifeCharter program is extraordinary."</p><div class="au">— Rachel P.</div></div>
+    <div class="testi"><span class="qm">"</span><p>"This program is an opportunity to transcend the ordinary and embark on a journey of self-realization, authenticity, and conscious living."</p><div class="au">— Samantha S.</div></div>
+    <div class="testi"><span class="qm">"</span><p>"After years of feeling trapped by fear and uncertainty, this work helped me create a life plan that supported me through one of the most difficult transitions of my life."</p><div class="au">— LifeCharter Participant</div></div>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== OBJECTIONS ====== -->
-<section class="section">
+<section class="section wash-wrap">
+  <div class="wash-blob b"></div>
   <div class="container">
     <h2>What Might Be <span class="s">Holding You Back</span></h2>
-
-    <div class="objection">
-      <h4>"I've invested in programs before. What makes this different?"</h4>
-      <p>Most programs give you information. LifeCharter gives you a <em>way of being</em>. You are not collecting more content — you are building a living blueprint you return to again and again across every dimension of your life.</p>
-    </div>
-
-    <div class="objection">
-      <h4>"I don't finish things."</h4>
-      <p>The Circle is designed differently. It is not a sprint. It is a rhythm of reflection, integration, and application. Many participants find the shame around "not finishing" dissolves when they stop measuring by productivity and start measuring by faithfulness to their own becoming.</p>
-    </div>
-
-    <div class="objection">
-      <h4>"I don't have time."</h4>
-      <p>The modules are self-paced within the container. The real work happens when you bring the framework into your daily life — not when you add another item to your to-do list.</p>
-    </div>
-
-    <div class="objection">
-      <h4>"I still feel too lost to do this kind of work."</h4>
-      <p>Feeling lost is exactly the right place to begin. LifeCharter does not assume you have it together. It assumes you are ready to tell the truth about where you are — and that is enough.</p>
-    </div>
-
-    <div class="objection">
-      <h4>"I'm not sure I can afford it right now."</h4>
-      <p>$2,497 — or $497 down with two payments of $997 — is an investment in your <em>entire life</em>. Participants report the money comes back multiplied because they stop leaking energy and start creating from alignment. Backed by a 7-day guarantee.</p>
-    </div>
-
-    <div class="objection">
-      <h4>"What if I'm not creative or spiritual enough?"</h4>
-      <p>There is no threshold. LifeCharter is for anyone honest enough to ask "Is there more?" and brave enough to pause and listen for the answer.</p>
-    </div>
-
-    <div class="objection">
-      <h4>"I still feel like I should figure it out on my own."</h4>
-      <p>That belief — that you must do this alone — may be exactly what is keeping you stuck. The Circle gives you structure and support without removing your agency.</p>
-    </div>
+    <div class="obj"><h4>"I've invested in programs before. What makes this different?"</h4><p>Most programs give you information. LifeCharter gives you a <em>way of being</em>. You are not collecting more content — you are building a living blueprint you return to again and again.</p></div>
+    <div class="obj"><h4>"I don't finish things."</h4><p>The Circle is not a sprint. It is a rhythm of reflection and application — without the shame around "not finishing."</p></div>
+    <div class="obj"><h4>"I don't have time."</h4><p>The modules are self-paced. The real work happens when you bring the framework into your daily life — not when you add to your to-do list.</p></div>
+    <div class="obj"><h4>"I still feel too lost."</h4><p>Feeling lost is exactly where to begin. LifeCharter does not assume you have it together. It assumes you are ready to tell the truth about where you are.</p></div>
+    <div class="obj"><h4>"I'm not sure I can afford it."</h4><p>$2,497 — or $497 down + 2 payments of $997 — is an investment in your entire life. Backed by a 7-day guarantee.</p></div>
+    <div class="obj"><h4>"What if I'm not spiritual enough?"</h4><p>No threshold required. LifeCharter is for anyone honest enough to ask "Is there more?" and brave enough to pause and listen.</p></div>
+    <div class="obj"><h4>"I should figure it out on my own."</h4><p>That belief may be exactly what is keeping you stuck. The Circle gives you structure and support without removing your agency.</p></div>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
-<!-- ====== IDENTITY TRANSFORMATION ====== -->
-<section class="section grey-bg">
+<!-- ====== IDENTITY ====== -->
+<section class="section bg-fog wash-wrap">
+  <div class="wash-blob l"></div>
   <div class="container">
     <h2>Who You Become <span class="s">In The Circle</span></h2>
     <p>You are not buying a course. You are choosing an identity shift.</p>
-    <p>You stop being someone who:</p>
-    <p style="padding-left: 20px;">↳ waits for life to feel safe before you move<br>
-    ↳ circles the same mountain year after year<br>
-    ↳ collects answers but never lands anywhere<br>
-    ↳ feels abandoned in your own process</p>
-    <p>And you begin becoming someone who:</p>
-    <p style="padding-left: 20px;">↳ knows their true next step<br>
-    ↳ moves from alignment instead of fear<br>
-    ↳ lives from purpose, not reaction<br>
-    ↳ trusts the Still Small Voice beneath the noise<br>
-    ↳ carries a living compass that never stops orienting you home</p>
-    <p style="font-size: 20px; font-family: 'Noto Serif', serif; margin-top: 16px;">This is who you are becoming. The Circle is where you begin to live it.</p>
+    <div class="two-col">
+      <div class="col-box">
+        <div class="ch">Stop Being</div>
+        <li>Waiting for life to feel safe before moving</li>
+        <li>Circling the same mountain year after year</li>
+        <li>Collecting answers but never landing anywhere</li>
+        <li>Abandoned in your own process</li>
+      </div>
+      <div class="col-box">
+        <div class="ch">Start Becoming</div>
+        <li>Someone who knows their true next step</li>
+        <li>Moving from alignment instead of fear</li>
+        <li>Living from purpose, not reaction</li>
+        <li>Carrying a compass that orients you home</li>
+      </div>
+    </div>
+    <p style="font-size:20px;font-family:'Noto Serif',serif;margin-top: 16px;">This is who you are becoming. The Circle is where you begin to live it.</p>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== DIFFERENTIATION ====== -->
-<section class="section">
+<section class="section wash-wrap">
+  <div class="wash-blob b"></div>
   <div class="container">
     <h2>Why This Is <span class="s">Not Just Another Program</span></h2>
     <p>LifeCharter Circle is not a goal-setting framework. Not a productivity system in spiritual language. Not a "find your passion" course.</p>
     <p>LifeCharter is a <em>way of being</em> — a method for returning to your true north no matter what season, setback, or success you are navigating.</p>
-    <p style="font-family: 'Noto Serif', serif; font-size: 19px;">It does not optimize your life. It <em>orients</em> your life. And orientation, once found, changes everything.</p>
+    <p style="font-family:'Noto Serif',serif;font-size:19px;">It does not optimize your life. It <em>orients</em> your life. And orientation, once found, changes everything.</p>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== URGENCY ====== -->
-<section class="section warm-bg">
+<section class="section bg-warm wash-wrap">
+  <div class="wash-blob t"></div>
   <div class="container">
     <h2>Why <span class="s">Now</span></h2>
     <p>You are not the same person who walked into the Incubator. Something has already shifted — you can feel it.</p>
     <p>The question is not whether you are ready for the Circle. The question is whether you will abandon yourself again by walking away from the door that just opened.</p>
     <p>The early adopter pricing — <strong>$2,497</strong> — is available for a limited time to Incubator graduates. Your cohort's rate will not be held open indefinitely.</p>
-    <p style="font-family: 'Noto Serif', serif; font-size: 18px;">There is a version of you six months from now who looks back at this moment and says, <em>"That is where I chose."</em></p>
+    <p style="font-family:'Noto Serif',serif;font-size:18px;">There is a version of you six months from now who looks back and says, <em>"That is where I chose."</em></p>
   </div>
 </section>
 
-<hr class="thin-line">
+<hr class="sep">
 
 <!-- ====== FINAL CTA ====== -->
-<section class="final-cta">
+<section class="fc">
+  <div class="hero-blob t"></div>
+  <div class="hero-blob b"></div>
   <div class="container">
     <h2>You Have Felt What Is Possible.</h2>
-    <p style="font-size: 20px;">Now give yourself the container to live it.</p>
-    <div style="margin: 30px 0;">
-      <div style="font-size: 38px; font-weight: 600; color: #C4B792; font-family: 'Noto Serif', serif;">$2,497</div>
-      <p style="margin-top: 8px;">or <strong>$497 down</strong> + 2 payments of <strong>$997</strong></p>
+    <p style="font-size:20px;">Now give yourself the container to live it.</p>
+    <div style="margin:30px 0;">
+      <div style="font-size:38px;font-weight:600;color:#C4B792;font-family:'Noto Serif',serif;">$2,497</div>
+      <p style="margin-top:8px;">or <strong>$497 down</strong> + 2 payments of <strong>$997</strong></p>
     </div>
-    <a href="#" class="cta-button">Join LifeCharter Circle Now</a>
-    <div class="guarantee">7-Day Guarantee — If the Circle is not the right fit, you receive a full refund.</div>
+    <a href="#" class="cta-btn">Join LifeCharter Circle Now</a>
+    <div class="gt">7-Day Guarantee — If the Circle is not the right fit, you receive a full refund.</div>
   </div>
 </section>
 
 <!-- ====== CLOSING ====== -->
-<section class="section" style="padding: 40px 0;">
-  <div class="container" style="text-align: center;">
-    <p style="font-size: 15px; color: #2F312F; opacity: 0.6; max-width: 480px; margin: 0 auto; font-style: italic;">
+<section style="padding:40px 0;">
+  <div class="container" style="text-align:center;">
+    <svg class="rosette-svg sm" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1"/>
+      <circle cx="24" cy="24" r="14" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <circle cx="24" cy="24" r="5" fill="currentColor" opacity="0.4"/>
+    </svg>
+    <p style="font-size:15px;color:#2F312F;opacity:0.6;max-width:480px;margin:16px auto 0;font-style:italic;">
       <em>The Incubator showed you the door.<br>
       The Circle is where you walk through — and keep walking.<br><br>
       You don't have to have it all figured out.<br>
