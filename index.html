@@ -3,38 +3,436 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mariposa Test Deploy 🦋</title>
+  <title>LifeCharter Circle — Your Next Faithful Step</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #1a1a2e;
+      background: #fafaf8;
+      line-height: 1.8;
+      font-size: 18px;
+    }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      padding: 80px 24px 60px;
       text-align: center;
     }
-    .card {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      padding: 3rem;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    .hero .container { max-width: 720px; }
+    .hero .prehead {
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e0b354;
+      margin-bottom: 20px;
+      font-family: 'Arial', sans-serif;
     }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    p { font-size: 1.2rem; opacity: 0.9; }
-    .check { color: #4ade80; font-size: 4rem; }
+    .hero h1 {
+      font-size: 42px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .hero h1 em { color: #e0b354; font-style: normal; }
+    .hero .subhead {
+      font-size: 20px;
+      line-height: 1.5;
+      opacity: 0.85;
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+    .hero .price-block {
+      background: rgba(224, 179, 84, 0.12);
+      border: 1px solid rgba(224, 179, 84, 0.3);
+      border-radius: 12px;
+      padding: 28px 20px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .hero .price-block .price { font-size: 40px; font-weight: 700; color: #e0b354; }
+    .hero .price-block .price-sub { font-size: 16px; opacity: 0.8; margin-top: 6px; }
+    .hero .price-block .payment-option { font-size: 18px; margin-top: 12px; opacity: 0.9; }
+
+    .cta-button {
+      display: inline-block;
+      background: #e0b354;
+      color: #1a1a2e;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 18px 48px;
+      border-radius: 50px;
+      text-decoration: none;
+      margin-top: 30px;
+      transition: all 0.2s;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .cta-button:hover { background: #d4a544; transform: translateY(-2px); }
+    .cta-button.alt { background: #1a1a2e; color: #e0b354; border: 2px solid #e0b354; }
+    .cta-button.alt:hover { background: #2a2a4e; }
+
+    /* Section styling */
+    .section { padding: 60px 0; }
+    .section h2 {
+      font-size: 32px;
+      margin-bottom: 24px;
+      color: #1a1a2e;
+      line-height: 1.3;
+    }
+    .section h2 .gold { color: #b8943c; }
+    .section p { margin-bottom: 18px; color: #333; }
+    .section p.lead { font-size: 20px; color: #1a1a2e; font-weight: 500; }
+
+    /* Grey background sections */
+    .grey-bg { background: #f0eee8; }
+
+    /* Divider */
+    hr { border: none; border-top: 1px solid #d4c9b8; margin: 0; }
+
+    /* Testimonials */
+    .testimonial {
+      background: #fff;
+      border-left: 4px solid #e0b354;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+    .testimonial .author {
+      font-style: normal;
+      font-weight: 600;
+      margin-top: 10px;
+      color: #1a1a2e;
+    }
+
+    /* Objections */
+    .objection { margin-bottom: 24px; }
+    .objection h4 { font-size: 18px; color: #1a1a2e; margin-bottom: 6px; }
+    .objection p { font-size: 16px; color: #444; margin-bottom: 0; }
+
+    /* Dimensions grid */
+    .dimensions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .dimension-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .dimension-item::before { content: "✦ "; color: #e0b354; }
+
+    /* Urgency bar */
+    .urgency-bar {
+      background: #1a1a2e;
+      color: #e0b354;
+      text-align: center;
+      padding: 16px 24px;
+      font-size: 16px;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      padding: 70px 24px;
+    }
+    .final-cta h2 { color: #fff; }
+    .final-cta p { color: rgba(255,255,255,0.8); font-size: 18px; }
+    .final-cta .guarantee {
+      margin-top: 20px;
+      font-size: 15px;
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 30px; }
+      .hero .subhead { font-size: 17px; }
+      .dimensions { grid-template-columns: 1fr; }
+      .section h2 { font-size: 26px; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="check">✅</div>
-    <h1>Deployment Test</h1>
-    <p>GitHub + Vercel connected via Mariposa 🦋</p>
-    <p style="margin-top:2rem;font-size:1rem;opacity:0.7;">Deployed at <span id="time"></span></p>
+
+<!-- ====== TOP URGENCY BAR ====== -->
+<div class="urgency-bar">
+  ⏳ Early Adopter Pricing — Your Incubator Cohort Rate Expires Soon
+</div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="container">
+    <div class="prehead">Your Next Faithful Step</div>
+    <h1>You Have The Awareness.<br>Now You Need The <em>Container</em>.</h1>
+    <p class="subhead">
+      You walked through the Incubator. You felt something shift.<br>
+      You know more information isn't the answer — <em>lived practice is</em>.<br>
+      This is the door to the deeper work.
+    </p>
+    <div class="price-block">
+      <div class="price">$2,497</div>
+      <div class="price-sub">one-time investment in your aligned life</div>
+      <div class="payment-option">— or —<br><strong>$497 down</strong> + 2 payments of <strong>$997</strong></div>
+    </div>
+    <br>
+    <a href="#" class="cta-button">Join LifeCharter Circle Now</a>
   </div>
-  <script>document.getElementById('time').textContent = new Date().toLocaleString();</script>
+</section>
+
+<!-- ====== THE PROBLEM / THE OPENING ====== -->
+<section class="section">
+  <div class="container">
+    <p class="lead">You've done the inner work.</p>
+    <p>You've read the books. Listened to the podcasts. Journaled. Prayed. Reflected. Maybe you've even worked with coaches, attended retreats, or spent hours in honest, tear-filled conversation with yourself.</p>
+    <p class="lead">And still — something hasn't landed.</p>
+    <p>You can feel it underneath everything: that quiet, patient knowing that you are circling the same mountain. The same patterns. The same hesitation. The same voice that whispers, "But what if I get it wrong?"</p>
+    <p>You are not broken. You are not undisciplined. You are not behind.</p>
+    <p>You have simply been trying to <em>think</em> your way into a new life — when what you actually need is a <em>way of being</em> that matches the person you are becoming.</p>
+    <p>That is what LifeCharter Circle exists to give you.</p>
+  </div>
+</section>
+
+<!-- ====== GREY: THE INCUBATOR GAP ====== -->
+<section class="section grey-bg">
+  <div class="container">
+    <h2>The Incubator Opened The Door.<br>Now Step Through.</h2>
+    <p>In the Incubator, you were introduced to three core secrets:</p>
+    <p><strong>Identity First</strong> — Why more information is not the answer if the inner premise has not shifted.</p>
+    <p><strong>The Yellow Light</strong> — How to pause before reacting, locate what is really happening, and choose from alignment instead of fear.</p>
+    <p><strong>Aligned Action</strong> — How to move forward rooted in who you are becoming, not who you have been.</p>
+    <p>You felt the truth of it. You recognized something real.</p>
+    <p>But recognition is not integration. Insight is not transformation.</p>
+    <p>Between knowing and living lies the gap that <em>only intentional practice, structure, and support can bridge.</em></p>
+    <p>LifeCharter Circle is that bridge.</p>
+  </div>
+</section>
+
+<!-- ====== WHAT YOU GET ====== -->
+<section class="section">
+  <div class="container">
+    <h2>Inside The Circle: <span class="gold">What You Receive</span></h2>
+
+    <p><strong>Guided LifeCharter Modules</strong></p>
+    <p>Not another course. A walk-through of the living architecture of your life. You examine where you are, what you truly desire, what beliefs have been shaping your choices, and what aligned vision wants to emerge through you.</p>
+
+    <p><strong>The 12 Life Dimensions</strong></p>
+    <p>LifeCharter looks at the whole person — not just one problem area. Over the course of the Circle, you explore every dimension that makes up a full human life:</p>
+
+    <div class="dimensions">
+      <div class="dimension-item">Spiritual Life</div>
+      <div class="dimension-item">Emotional Life</div>
+      <div class="dimension-item">Health & Vitality</div>
+      <div class="dimension-item">Relationships</div>
+      <div class="dimension-item">Career & Calling</div>
+      <div class="dimension-item">Finances</div>
+      <div class="dimension-item">Character & Integrity</div>
+      <div class="dimension-item">Intellectual Life</div>
+      <div class="dimension-item">Social Life</div>
+      <div class="dimension-item">Parenting & Family</div>
+      <div class="dimension-item">Quality of Life</div>
+      <div class="dimension-item">Overall Life Vision</div>
+    </div>
+
+    <p><strong>Coaching & Reflection</strong></p>
+    <p>You bring your real life into the Circle — the decisions you're facing, the resistance you're feeling, the patterns you keep noticing. You are not consuming content. You are being supported as you <em>apply</em> it.</p>
+
+    <p><strong>Community</strong></p>
+    <p>You are surrounded by fellow travelers who are also choosing clarity, truth, and aligned becoming. This is not a passive group. It is a witnessing community — a place of shared momentum and honest company.</p>
+
+    <p><strong>Practical Integration Tools</strong></p>
+    <p>The Traffic Light Decision Model. The Yellow Yield practice. The Aligned Becoming Process. These aren't concepts — they are daily practices that help you move through life with more presence, courage, and consistency.</p>
+
+    <p><strong>Your Living LifeCharter Blueprint</strong></p>
+    <p>By the end, you have more than notes in a notebook. You have a <em>personal compass</em> — a working document that helps you return to your true north again and again, no matter what life throws at you.</p>
+  </div>
+</section>
+
+<!-- ====== THE CORE MECHANISM ====== -->
+<section class="section grey-bg">
+  <div class="container">
+    <h2>How LifeCharter Actually Works</h2>
+    <p>Most frameworks focus on behavior. Do this. Stop that. Optimize here.</p>
+    <p>LifeCharter works <em>underneath</em> the behavior.</p>
+    <p>It begins with a single question: <strong>What premise am I living from?</strong></p>
+    <p>From there, the progression is simple — and inexhaustible:</p>
+    <p><strong>Premise</strong> → Identify the belief quietly directing your life.<br>
+    <strong>Vision</strong> → Clarify what you truly want, not what you were taught to want.<br>
+    <strong>Purpose</strong> → Reconnect to meaning, contribution, and divine alignment.<br>
+    <strong>Strategy</strong> → Create next steps that match your identity, values, and season.</p>
+    <p>The Traffic Light Model supports every step:</p>
+    <p>🔴 <strong>Red Light</strong> — Where am I stopped, stuck, or reacting from fear?<br>
+    🟡 <strong>Yellow Light</strong> — Can I pause, locate truth, and choose consciously?<br>
+    🟢 <strong>Green Light</strong> — What is the aligned action — not frantic action — that honors who I am becoming?</p>
+    <p>This is why LifeCharter is not just mindset work. It is <em>identity, vision, purpose, and strategy</em> brought into one living system.</p>
+  </div>
+</section>
+
+<!-- ====== OUTCOMES ====== -->
+<section class="section">
+  <div class="container">
+    <h2>What Shifts Inside The Circle</h2>
+    <p>Participants don't just learn more — they <em>become different people</em>.</p>
+    <p>↳ Overwhelm → Clarity. You stop trying to solve everything at once and begin seeing the true next step.</p>
+    <p>↳ Reaction → Response. You learn to pause before old patterns take the wheel.</p>
+    <p>↳ Collecting answers → Deeper alignment. You stop gathering and start <em>living from</em> the truth already emerging within you.</p>
+    <p>↳ Scattered effort → Focused action. You choose actions that match your values, vision, and season.</p>
+    <p>↳ Self-doubt → Self-trust. You learn to hear the Still Small Voice beneath fear, urgency, and confusion.</p>
+    <p>↳ Survival identity → Aligned becoming. You stop defining yourself by what happened and begin creating from who you truly are.</p>
+    <p>↳ Spiritual disconnection → Embodied faith. You bring prayer, reflection, intuition, and practical movement into daily life.</p>
+    <p>↳ Stuckness → Sacred momentum. You take faithful steps — not because everything is figured out, but because you are no longer abandoning yourself in the process.</p>
+  </div>
+</section>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section class="section grey-bg">
+  <div class="container">
+    <h2>What Travel Partners Are Saying</h2>
+
+    <div class="testimonial">
+      <p>"I have never heard anyone talk about life design as holistically as Babs. The way she covers all 12 different dimensions of your life in the LifeCharter program is extraordinary."</p>
+      <div class="author">— Rachel P.</div>
+    </div>
+
+    <div class="testimonial">
+      <p>"This program is an opportunity to transcend the ordinary and embark on a journey of self-realization, authenticity, and conscious living."</p>
+      <div class="author">— Samantha S.</div>
+    </div>
+
+    <div class="testimonial">
+      <p>"After years of feeling trapped by fear and uncertainty, this work helped me create a life plan that supported me through one of the most difficult transitions of my life."</p>
+      <div class="author">— LifeCharter Participant</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== OBJECTIONS ====== -->
+<section class="section">
+  <div class="container">
+    <h2>What Might Be Holding You Back</h2>
+
+    <div class="objection">
+      <h4>"I've invested in programs before. What makes this different?"</h4>
+      <p>Most programs give you information. LifeCharter gives you a <em>way of being</em>. You are not collecting more content — you are building a living blueprint that you return to again and again across every dimension of your life. It is not a course you complete. It is a compass you carry.</p>
+    </div>
+
+    <div class="objection">
+      <h4>"I don't finish things."</h4>
+      <p>The Circle is designed differently. It is not a sprint to the finish line. It is a rhythm of reflection, integration, and application. Many participants find that the shame around "not finishing" begins to dissolve when they stop measuring their life by productivity and start measuring it by faithfulness to their own becoming.</p>
+    </div>
+
+    <div class="objection">
+      <h4>"I don't have time."</h4>
+      <p>The Circle meets you where you are. The modules are self-paced within the container, and the real work happens when you bring the framework into your daily life — not when you add another item to your to-do list. You stop spending energy on things that drain you. The time surfaces.</p>
+    </div>
+
+    <div class="objection">
+      <h4>"I still feel too lost to do this kind of work."</h4>
+      <p>Feeling lost is exactly the right place to begin. LifeCharter does not assume you have it together. It assumes you are ready to tell the truth about where you are — and that is enough. The framework holds you while you find your footing.</p>
+    </div>
+
+    <div class="objection">
+      <h4>"I'm not sure I can afford it right now."</h4>
+      <p>The one-time investment of $2,497 — or $497 down with two payments of $997 — is an investment in your <em>entire life</em>, across every dimension. Participants consistently report that the money comes back multiplied, not because LifeCharter is a "wealth program," but because they stop leaking their energy into things that don't matter and start creating from alignment. There is also a 7-day guarantee — you can walk through the first week, feel the work, and if it is not right for you, you receive a full refund.</p>
+    </div>
+
+    <div class="objection">
+      <h4>"What if I'm not creative / spiritual enough for this?"</h4>
+      <p>There is no threshold you need to meet. LifeCharter is not for a certain type of person. It is for anyone who is honest enough to ask: "Is there more?" and brave enough to pause and listen for the answer. That is all that is required.</p>
+    </div>
+
+    <div class="objection">
+      <h4>"I still feel like I should figure it out on my own."</h4>
+      <p>That belief — the one that says you must do this alone — may be exactly what is keeping you stuck. The Circle does not take away your agency. It gives you the support, structure, and witness that make your own agency <em>effective</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== IDENTITY TRANSFORMATION ====== -->
+<section class="section grey-bg">
+  <div class="container">
+    <h2>Who You Become In The Circle</h2>
+    <p>You are not buying a course. You are choosing an identity shift.</p>
+    <p>In the Circle, you stop being someone who is:</p>
+    <p>↳ waiting for life to feel safe before you move<br>
+    ↳ circling the same mountain year after year<br>
+    ↳ collecting answers but never landing anywhere<br>
+    ↳ abandoned in your own process</p>
+    <p>And you begin becoming someone who:</p>
+    <p>↳ knows their true next step<br>
+    ↳ moves from alignment instead of fear<br>
+    ↳ lives from purpose, not reaction<br>
+    ↳ trusts the Still Small Voice beneath the noise<br>
+    ↳ carries a living compass that never stops orienting you home</p>
+    <p>This is who you are becoming. The Circle is where you begin to live it.</p>
+  </div>
+</section>
+
+<!-- ====== DIFFERENTIATION ====== -->
+<section class="section">
+  <div class="container">
+    <h2>Why This Is Not Just Another Program</h2>
+    <p>LifeCharter Circle is not:</p>
+    <p>↳ Another goal-setting framework<br>
+    ↳ A productivity system dressed in spiritual language<br>
+    ↳ A group coaching program where you watch someone else do the work<br>
+    ↳ Another "find your passion" course</p>
+    <p>LifeCharter is a <em>way of being</em> — a method for returning to your true north no matter what season, setback, or success you are navigating. It does not optimize your life. It <em>orients</em> your life. And orientation, once found, changes everything.</p>
+  </div>
+</section>
+
+<!-- ====== URGENCY ====== -->
+<section class="section grey-bg">
+  <div class="container">
+    <h2>Why Now</h2>
+    <p>You are not the same person who walked into the Incubator. Something has already shifted — you can feel it. The question is not whether you are ready for the Circle. The question is whether you will abandon yourself again by walking away from the door that just opened.</p>
+    <p>The early adopter pricing — <strong>$2,497</strong> — is available for a limited time to Incubator graduates. Your cohort's rate will not be held open indefinitely. This is not a pressure tactic. It is a statement: <em>this moment matters</em>.</p>
+    <p>There is a version of you six months from now who looks back at this moment and says, "That is where I chose." Make sure it is a version of you you want to meet.</p>
+  </div>
+</section>
+
+<!-- ====== FINAL CTA ====== -->
+<section class="final-cta">
+  <div class="container">
+    <h2>You Have Felt What Is Possible.</h2>
+    <p>Now give yourself the container to live it.</p>
+    <div style="margin: 30px 0;">
+      <div style="font-size: 40px; font-weight: 700; color: #e0b354;">$2,497</div>
+      <p style="margin-top: 8px;">or <strong>$497 down</strong> + 2 payments of <strong>$997</strong></p>
+    </div>
+    <a href="#" class="cta-button">Join LifeCharter Circle Now</a>
+    <div class="guarantee">
+      7-Day Guarantee — If the Circle is not the right fit, you receive a full refund.
+    </div>
+  </div>
+</section>
+
+<!-- ====== CLOSING STATEMENT ====== -->
+<section class="section" style="padding: 40px 0;">
+  <div class="container" style="text-align: center;">
+    <p style="font-size: 16px; color: #777; max-width: 500px; margin: 0 auto;">
+      <em>The Incubator showed you the door.<br>
+      The Circle is where you walk through — and keep walking.<br><br>
+      You don't have to have it all figured out.<br>
+      You just have to be willing to take the next faithful step.<br><br>
+      This is that step.</em>
+    </p>
+  </div>
+</section>
+
 </body>
 </html>
