@@ -53,6 +53,7 @@
     }
     .hero-blob {
       position:absolute; pointer-events:none; z-index:0;
+    .hero-bg-logo { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); max-width:70%; max-height:70%; opacity:0.045; pointer-events:none; z-index:0; object-fit:contain; }
       border-radius:50%; filter:blur(70px); opacity:0.06;
     }
     .hero-blob.t { top:-100px; right:-80px; width:500px; height:500px; background:#C4B792; }
@@ -196,20 +197,9 @@
 
 <div class="ub">⏳ Early Adopter Pricing — Your Incubator Cohort Rate Expires Soon</div>
 
-<!-- ====== HERO ====== -->
 <section class="hero">
-  <div class="hero-blob t"></div>
-  <div class="hero-blob b"></div>
+  <img src="images/lifecharter-logo-horizontal.jpg" alt="" class="hero-bg-logo">
   <div class="container">
-    <img src="images/lifecharter-logo-horizontal.jpg" alt="LifeCharter" style="max-width:220px;height:auto;display:block;margin:0 auto 28px;opacity:0.9;">
-      <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="1.2"/>
-      <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 3"/>
-      <circle cx="32" cy="32" r="6" fill="currentColor" opacity="0.5"/>
-      <line x1="4" y1="32" x2="12" y2="32" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
-      <line x1="52" y1="32" x2="60" y2="32" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
-      <line x1="32" y1="4" x2="32" y2="12" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
-      <line x1="32" y1="52" x2="32" y2="60" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
-    </svg>
     <div class="prehead">Your Next Faithful Step</div>
     <h1>You Have The Awareness.<br>Now You Need The <span class="g">Container</span>.</h1>
     <p class="subhead">You walked through the Incubator. You felt something shift.<br>You know more information isn't the answer — <em>lived practice is</em>.<br>This is the door to the deeper work.</p>
